@@ -75,8 +75,10 @@ void compile_main (FILE *in) {
   printf("\tsw\t$ra, -8($sp)\n");
   printf("\tsw\t$fp, -4($sp)\n");
   printf("\taddi\t$fp, $sp, -4\n");
-  printf("\taddi\t$sp, $sp, -40000\n");
-  printf("\taddi\t$t0, $fp, -8\n");
+  printf("\tli\t$v0, 9\n");
+  printf("\tli\t$a0, 12000\n");
+  printf("\tsyscall\n");
+  printf("\tmove\t$t0, $v0\n");
   compile(in);
 }
 
