@@ -52,6 +52,7 @@ void compile (FILE* in) {
         loop_depth--;
         printf("\tj\t%s\n", loop_start_label);
         printf("%s:\n", loop_end_label);
+        break;
       case ']':
         if (loop_depth > 0) return;
         else break;
