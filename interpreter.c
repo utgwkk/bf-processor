@@ -4,6 +4,15 @@
 static char *p, *ptr;
 static char vars[30000];
 
+void beyond_loop_end () {
+  while (*p != ']') {
+    p++;
+    if (*p == '[') {
+      beyond_loop_end();
+    }
+  }
+}
+
 void eval () {
   char *oldptr;
   while (*p != '\0') {
@@ -27,6 +36,10 @@ void eval () {
         *ptr = getc(stdin);
         break;
       case '[':
+        if (!(*ptr)) {
+          beyond_loop_end();
+          break;
+        }
         oldptr = p++;
         eval();
         // if nonzero
