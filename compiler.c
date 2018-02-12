@@ -107,7 +107,7 @@ void compile (FILE* in) {
         printf("\tputchar(*ptr);\n");
         break;
       case ',':
-        printf("\t*ptr = getc();\n");
+        printf("\t*ptr = getchar();\n");
         break;
       case '[':
         printf("\twhile (*ptr) {\n");
