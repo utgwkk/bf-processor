@@ -78,11 +78,11 @@ void compile_main (FILE *in) {
   compile(in);
   printf(
     "ret:\n"
-		"\taddi\t$sp, $fp, 4\n"
-		"\tlw\t$ra, -4($fp)\n"
-		"\tlw\t$fp, 0($fp)\n"
-		"\tjr\t$ra\n"
-	);
+    "\taddi\t$sp, $fp, 4\n"
+    "\tlw\t$ra, -4($fp)\n"
+    "\tlw\t$fp, 0($fp)\n"
+    "\tjr\t$ra\n"
+  );
 }
 #endif
 
