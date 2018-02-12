@@ -1,10 +1,21 @@
-OUT=bfi
-IN=interpreter.c
+INTERPRETER=bfi
+COMPILER=bfc
+OUT=$(INTERPRETER) $(COMPILER)
+INTERPRETER_IN=interpreter.c
+COMPILER_IN=compiler.c
 
-$(OUT): $(IN)
-	gcc -o $(OUT) $(IN)
+.PHONY: clean test compiler interpreter all
 
-.PHONY: clean test
+all: compiler interpreter
+
+$(INTERPRETER): $(INTERPRETER_IN)
+	gcc -o $(INTERPRETER) $(INTERPRETER_IN)
+
+$(COMPILER): $(COMPILER_IN)
+	gcc -o $(COMPILER) $(COMPILER_IN)
+
+compiler: $(COMPILER)
+interpreter: $(INTERPRETER)
 
 clean:
 	rm -f $(OUT)
