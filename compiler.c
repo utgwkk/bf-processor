@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include <assert.h>
 
-static int label_number = 0;
 static int loop_depth = 0;
 
 void make_label (char *ret) {
+  static int label_number = 0;
   sprintf(ret, "L%d", label_number);
   label_number++;
 }
