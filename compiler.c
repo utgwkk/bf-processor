@@ -17,16 +17,16 @@ void compile (FILE* in) {
     switch (ch) {
       case '+':
         printf("\tlw\t$t1, 0($t0)\n");
-        printf("\taddi\t$t1, $t1, 1\n");
+        printf("\taddu\t$t1, $t1, 1\n");
         printf("\tsw\t$t1, 0($t0)\n");
         break;
       case '-':
         printf("\tlw\t$t1, 0($t0)\n");
-        printf("\taddi\t$t1, $t1, -1\n");
+        printf("\tadd\t$t1, $t1, -1\n");
         printf("\tsw\t$t1, 0($t0)\n");
         break;
       case '>':
-        printf("\taddi\t$t0, $t0, 4\n");
+        printf("\taddiu\t$t0, $t0, 4\n");
         break;
       case '<':
         printf("\taddi\t$t0, $t0, -4\n");
@@ -75,8 +75,8 @@ void compile_main (FILE *in) {
   printf("\tsw\t$ra, -8($sp)\n");
   printf("\tsw\t$fp, -4($sp)\n");
   printf("\taddi\t$fp, $sp, -4\n");
-  printf("\taddi\t$sp, $sp, -3000\n");
-  printf("\taddi\t$t0, $fp, -16\n");
+  printf("\taddi\t$sp, $sp, -40000\n");
+  printf("\taddi\t$t0, $fp, -8\n");
   compile(in);
 }
 
