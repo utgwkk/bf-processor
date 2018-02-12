@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#define TO_MIPS
 
 static int loop_depth = 0;
 
@@ -10,6 +11,7 @@ void make_label (char *ret) {
   label_number++;
 }
 
+#ifdef TO_MIPS
 void compile (FILE* in) {
   char ch;
   char loop_start_label[32], loop_end_label[32];
@@ -82,6 +84,61 @@ void compile_main (FILE *in) {
 		"\tjr\t$ra\n"
 	);
 }
+#endif
+
+#ifdef TO_C
+void compile (FILE* in) {
+  char ch;
+  while ((ch = fgetc(in)) != EOF) {
+    switch (ch) {
+      case '+':
+        printf("\t++(*ptr);\n");
+        break;
+      case '-':
+        printf("\t--(*ptr);\n");
+        break;
+      case '>':
+        printf("\t++ptr;\n");
+        break;
+      case '<':
+        printf("\t--ptr;\n");
+        break;
+      case '.':
+        printf("\tputchar(*ptr);\n");
+        break;
+      case ',':
+        printf("\t*ptr = getc();\n");
+        break;
+      case '[':
+        printf("\twhile (*ptr) {\n");
+        break;
+      case ']':
+        printf("\t}\n");
+        break;
+      default:
+        break;
+    }
+  }
+}
+
+void compile_main (FILE *in) {
+  printf(
+    "#include <stdio.h>\n"
+    "#include <string.h>\n"
+    "\n"
+    "char v[30000];"
+    "\n"
+    "int main (void) {\n"
+    "\tchar *ptr = v;\n"
+    "\tmemset(v, 0, sizeof v);\n"
+  );
+  compile(in);
+  printf(
+    "\treturn 0;\n"
+    "}\n"
+  );
+}
+#endif
 
 int main (int argc, char **argv) {
   FILE *in;
