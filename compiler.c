@@ -126,7 +126,7 @@ void compile_main (FILE *in) {
     "#include <stdio.h>\n"
     "#include <string.h>\n"
     "\n"
-    "char v[30000];"
+    "char v[30000];\n"
     "\n"
     "int main (void) {\n"
     "\tchar *ptr = v;\n"
