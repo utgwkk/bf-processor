@@ -60,13 +60,6 @@ void compile (FILE* in) {
         break;
     }
   }
-  printf(
-    "ret:\n"
-		"\taddi\t$sp, $fp, 4\n"
-		"\tlw\t$ra, -4($fp)\n"
-		"\tlw\t$fp, 0($fp)\n"
-		"\tjr\t$ra\n"
-	);
 }
 
 void compile_main (FILE *in) {
@@ -81,6 +74,13 @@ void compile_main (FILE *in) {
   printf("\tsyscall\n");
   printf("\tmove\t$t0, $v0\n");
   compile(in);
+  printf(
+    "ret:\n"
+		"\taddi\t$sp, $fp, 4\n"
+		"\tlw\t$ra, -4($fp)\n"
+		"\tlw\t$fp, 0($fp)\n"
+		"\tjr\t$ra\n"
+	);
 }
 
 int main (int argc, char **argv) {
