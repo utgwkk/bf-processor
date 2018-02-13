@@ -12,7 +12,7 @@ void make_label (char *ret) {
 }
 
 #ifdef TO_MIPS
-void compile (FILE* in) {
+void compile (FILE *in) {
   char ch;
   char loop_start_label[32], loop_end_label[32];
   while ((ch = fgetc(in)) != EOF) {
@@ -95,7 +95,7 @@ void compile_main (FILE *in) {
 #endif
 
 #ifdef TO_C
-void compile (FILE* in) {
+void compile (FILE *in) {
   char ch;
   while ((ch = fgetc(in)) != EOF) {
     switch (ch) {
