@@ -18,14 +18,18 @@ void compile (FILE* in) {
   while ((ch = fgetc(in)) != EOF) {
     switch (ch) {
       case '+':
-        printf("\tlw\t$t1, 0($t0)\n");
-        printf("\taddu\t$t1, $t1, 1\n");
-        printf("\tsw\t$t1, 0($t0)\n");
+        printf(
+          "\tlw\t$t1, 0($t0)\n"
+          "\taddu\t$t1, $t1, 1\n"
+          "\tsw\t$t1, 0($t0)\n"
+        );
         break;
       case '-':
-        printf("\tlw\t$t1, 0($t0)\n");
-        printf("\tadd\t$t1, $t1, -1\n");
-        printf("\tsw\t$t1, 0($t0)\n");
+        printf(
+          "\tlw\t$t1, 0($t0)\n"
+          "\tadd\t$t1, $t1, -1\n"
+          "\tsw\t$t1, 0($t0)\n"
+        );
         break;
       case '>':
         printf("\taddiu\t$t0, $t0, 4\n");
@@ -34,9 +38,11 @@ void compile (FILE* in) {
         printf("\taddi\t$t0, $t0, -4\n");
         break;
       case '.':
-        printf("\tli\t$v0, 11\n");
-        printf("\tlw\t$a0, 0($t0)\n");
-        printf("\tsyscall\n");
+        printf(
+          "\tli\t$v0, 11\n"
+          "\tlw\t$a0, 0($t0)\n"
+          "\tsyscall\n"
+        );
         break;
       case ',':
         printf("\tli\t$v0, 12\n");
@@ -65,16 +71,18 @@ void compile (FILE* in) {
 }
 
 void compile_main (FILE *in) {
-  printf("\t.text\n");
-  printf("\t.align\t2\n");
-  printf("main:\n");
-  printf("\tsw\t$ra, -8($sp)\n");
-  printf("\tsw\t$fp, -4($sp)\n");
-  printf("\taddi\t$fp, $sp, -4\n");
-  printf("\tli\t$v0, 9\n");
-  printf("\tli\t$a0, 12000\n");
-  printf("\tsyscall\n");
-  printf("\tmove\t$t0, $v0\n");
+  printf(
+    "\t.text\n"
+    "\t.align\t2\n"
+    "main:\n"
+    "\tsw\t$ra, -8($sp)\n"
+    "\tsw\t$fp, -4($sp)\n"
+    "\taddi\t$fp, $sp, -4\n"
+    "\tli\t$v0, 9\n"
+    "\tli\t$a0, 12000\n"
+    "\tsyscall\n"
+    "\tmove\t$t0, $v0\n"
+  );
   compile(in);
   printf(
     "ret:\n"
